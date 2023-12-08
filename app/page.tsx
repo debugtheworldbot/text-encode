@@ -65,6 +65,7 @@ const IndexPage = () => {
           className="cursor-pointer bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-2 rounded"
           onClick={() => {
             navigator.clipboard.writeText(state.encodeRes);
+            toast("copied");
           }}
         >
           {state.encodeRes}

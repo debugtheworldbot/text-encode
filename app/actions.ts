@@ -13,15 +13,7 @@ export async function uploadImg(file: string) {
       fileName: "test.jpg",
     });
     if (result) {
-      const url = imagekit.url({
-        src: result.url,
-        transformation: [
-          {
-            height: "1024",
-            width: "1024",
-          },
-        ],
-      });
+      const url = result.url;
       return { url, status: "ok" };
     }
   } catch (err) {
