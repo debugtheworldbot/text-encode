@@ -46,23 +46,23 @@ const IndexPage = () => {
     toast("decode success!");
   };
   return (
-    <main className="min-h-screen flex flex-col justify-center items-center">
-      <div className="border border-solid border-red-300 p-4">
-        <label>
+    <main className="min-h-screen flex gap-4 justify-center items-center">
+      <div className="shadow-xl p-6 rounded">
+        <label className="label">
           endcode text:
-          <input ref={eRef} />
+          <input ref={eRef} className="input ml-4" />
         </label>
         <div className="my-4">
           <UploadForm onSuccess={onUploaded} />
         </div>
 
-        <button className="" onClick={clickEncode}>
+        <button className="btn btn-primary" onClick={clickEncode}>
           encode img into text
         </button>
 
         <div>result:</div>
         <div
-          className="cursor-pointer bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-2 rounded"
+          className="link link-info cursor-pointer"
           onClick={() => {
             navigator.clipboard.writeText(state.encodeRes);
             toast("copied");
@@ -72,13 +72,13 @@ const IndexPage = () => {
         </div>
       </div>
 
-      <div className="border border-solid border-red-300 p-4 mt-6">
-        <label>
+      <div className="shadow-xl p-6 rounded">
+        <label className="label">
           decode text:
-          <input ref={dRef} />
+          <input ref={dRef} className="input ml-4" />
         </label>
-        <button className="block" onClick={clickDecode}>
-          decode text
+        <button className="block btn btn-primary" onClick={clickDecode}>
+          decode image:
         </button>
         {state.decodeRes && (
           <div>

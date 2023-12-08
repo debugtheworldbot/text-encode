@@ -55,39 +55,35 @@ const UploadForm = (props: Prop) => {
       }) => (
         <Form onSubmit={handleSubmit} encType="multipart/form-data">
           <div>
-            {avatarPreview && (
+            {avatarPreview ? (
               <Image width={600} height={600} src={avatarPreview} alt="test" />
-            )}
-            <label htmlFor="avatar">
-              {!avatarPreview && (
-                <div className="border shadow mb-4 cursor-pointer">
-                  select secret image
-                </div>
-              )}
-              <input
-                className="hidden"
-                onChange={(e) => {
-                  if (e.target.files?.[0]) {
-                    setFieldValue(
-                      "avatarPreview",
-                      URL.createObjectURL(e.target.files[0]),
-                    );
+            ) : (
+              <label htmlFor="avatar">
+                <input
+                  className="file-input"
+                  onChange={(e) => {
+                    if (e.target.files?.[0]) {
+                      setFieldValue(
+                        "avatarPreview",
+                        URL.createObjectURL(e.target.files[0]),
+                      );
 
-                    setFieldValue("avatar", e.target.files[0]);
-                  }
-                }}
-                type="file"
-                accept="image/*"
-                id="avatar"
-                name="avatar"
-              />
-            </label>
+                      setFieldValue("avatar", e.target.files[0]);
+                    }
+                  }}
+                  type="file"
+                  accept="image/*"
+                  id="avatar"
+                  name="avatar"
+                />
+              </label>
+            )}
             <ErrorMessage name="avatar" />
           </div>
           {!success && (
             <button
-              className="border shadow"
-              disabled={isSubmitting}
+              className="btn btn-neutral"
+              disabled={isSubmitting || !avatarPreview}
               type="submit"
             >
               {isSubmitting ? "Uploading....." : "upload"}
