@@ -1,19 +1,14 @@
 import ImageKit from "imagekit";
 import Image from "next/image";
-import UploadForm from "@/components/UploadForm";
+import UploadForm from "../_components/uploadForm";
 
 const IndexPage = async () => {
   const images = await getList();
 
   return (
-    <main title="Home | Next.js + TypeScript Example">
+    <main className="min-h-screen">
       <h1>Imagekit Next js 👋</h1>
-      {images?.map(({ fileId, name, url }) => (
-        <div key={fileId}>
-          <Image src={url} alt={name} width={512} height={512} />
-        </div>
-      ))}
-      {/* <UploadForm /> */}
+      <UploadForm />
     </main>
   );
 };
