@@ -4,7 +4,6 @@ import UploadForm from "./_components/uploadForm";
 import { decodeStr, encodeStr } from "./_utils/text";
 import Image from "next/image";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const IndexPage = () => {
   const [state, setState] = useState({
