@@ -56,7 +56,7 @@ const UploadForm = (props: Prop) => {
         <Form onSubmit={handleSubmit} encType="multipart/form-data">
           <div>
             {avatarPreview && (
-              <Image width={200} height={200} src={avatarPreview} alt="test" />
+              <Image width={600} height={600} src={avatarPreview} alt="test" />
             )}
             <label htmlFor="avatar">
               {!avatarPreview && (

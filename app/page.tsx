@@ -83,8 +83,8 @@ const IndexPage = () => {
         {state.decodeRes && (
           <div>
             <Image
-              width={200}
-              height={200}
+              width={600}
+              height={600}
               src={state.decodeRes}
               alt="result"
             />
