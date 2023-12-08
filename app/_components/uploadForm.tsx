@@ -3,6 +3,7 @@ import axios from "axios";
 import { Formik, Form, ErrorMessage } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
+import { uploadImg } from "../actions";
 
 const UploadForm = () => {
   return (
@@ -17,15 +18,16 @@ const UploadForm = () => {
       })}
       onSubmit={async ({ avatar }, { setSubmitting, setFieldValue }) => {
         try {
-          const formData = new FormData();
-
-          formData.append("file", avatar);
-
-          console.log("uploadllllllll", formData);
-
-          const { data } = await axios.post("/api/upload", formData);
-
-          setFieldValue("avatarPreview", data.url);
+          const reader = new FileReader();
+          let baseString = "";
+          reader.onloadend = async function() {
+            baseString = reader.result as string;
+            const url = await uploadImg(baseString);
+            if (!url) return;
+            setFieldValue("avatarPreview", url);
+          };
+          // @ts-ignore
+          reader.readAsDataURL(avatar);
         } catch (err) {
           console.log(err);
         } finally {
@@ -52,6 +54,7 @@ const UploadForm = () => {
                       "avatarPreview",
                       URL.createObjectURL(e.target.files[0]),
                     );
+
                     setFieldValue("avatar", e.target.files[0]);
                   }
                 }}
