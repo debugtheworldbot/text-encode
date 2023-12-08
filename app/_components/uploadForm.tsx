@@ -47,7 +47,11 @@ const UploadForm = () => {
               <Image width={200} height={200} src={avatarPreview} alt="test" />
             )}
             <label htmlFor="avatar">
+              <div className="border shadow mb-4 cursor-pointer">
+                select secret imgage
+              </div>
               <input
+                className="hidden"
                 onChange={(e) => {
                   if (e.target.files?.[0]) {
                     setFieldValue(
@@ -66,7 +70,11 @@ const UploadForm = () => {
             </label>
             <ErrorMessage name="avatar" />
           </div>
-          <button disabled={isSubmitting} type="submit">
+          <button
+            className="border shadow"
+            disabled={isSubmitting}
+            type="submit"
+          >
             Upload
           </button>
         </Form>
