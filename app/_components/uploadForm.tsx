@@ -1,11 +1,18 @@
 "use client";
-import axios from "axios";
 import { Formik, Form, ErrorMessage } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
 import { uploadImg } from "../actions";
+import { useState } from "react";
 
-const UploadForm = () => {
+interface Prop {
+  onSuccess: (url: string) => void;
+  onFail?: () => void;
+}
+const UploadForm = (props: Prop) => {
+  const { onSuccess } = props;
+
+  const [fullfiled, setFullfiled] = useState(false);
   return (
     <Formik
       initialValues={{
@@ -22,9 +29,10 @@ const UploadForm = () => {
           let baseString = "";
           reader.onloadend = async function() {
             baseString = reader.result as string;
-            const url = await uploadImg(baseString);
-            if (!url) return;
-            setFieldValue("avatarPreview", url);
+            const res = await uploadImg(baseString);
+            if (!res?.url) return;
+            onSuccess(res.url);
+            setFieldValue("avatarPreview", res.url);
           };
           // @ts-ignore
           reader.readAsDataURL(avatar);
@@ -70,13 +78,15 @@ const UploadForm = () => {
             </label>
             <ErrorMessage name="avatar" />
           </div>
-          <button
-            className="border shadow"
-            disabled={isSubmitting}
-            type="submit"
-          >
-            Upload
-          </button>
+          {!avatarPreview && (
+            <button
+              className="border shadow"
+              disabled={isSubmitting}
+              type="submit"
+            >
+              {isSubmitting ? "Uploading....." : "upload"}
+            </button>
+          )}
         </Form>
       )}
     </Formik>

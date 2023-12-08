@@ -22,9 +22,9 @@ export async function uploadImg(file: string) {
           },
         ],
       });
-      return url;
+      return { url, status: "ok" };
     }
   } catch (err) {
-    return { status: 500 };
+    return { url: "", status: "error" };
   }
 }

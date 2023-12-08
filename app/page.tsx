@@ -10,13 +10,19 @@ const IndexPage = () => {
     decodeRes: "",
   });
 
+  const [imgUrl, setImgUrl] = useState("");
+
+  const eRef = useRef<any>(null);
   const dRef = useRef<any>(null);
 
+  const onUploaded = (url: string) => {
+    setImgUrl(url);
+  };
   const clickEncode = () => {
-    const result = encodeStr(
-      "hihi",
-      "https://ik.imagekit.io/okr042lm5/test_bKhpCiqlz.jpg?tr=h-512%2Cw-512",
-    );
+    const input = eRef.current?.value;
+    if (!input) return console.log("no input");
+    if (!imgUrl) return console.log("no img url");
+    const result = encodeStr(input, imgUrl);
 
     setState({
       ...state,
@@ -38,17 +44,25 @@ const IndexPage = () => {
       <div className="border border-solid border-red-300 p-4">
         <label>
           endcode text:
-          <input />
+          <input ref={eRef} />
         </label>
         <div className="my-4">
-          <UploadForm />
+          <UploadForm onSuccess={onUploaded} />
         </div>
 
         <button className="" onClick={clickEncode}>
           encode img into text
         </button>
 
-        <div>{state.encodeRes}</div>
+        <div>result:</div>
+        <div
+          className="cursor-pointer"
+          onClick={() => {
+            navigator.clipboard.writeText(state.encodeRes);
+          }}
+        >
+          {state.encodeRes}
+        </div>
       </div>
 
       <div className="border border-solid border-red-300 p-4 mt-6">
