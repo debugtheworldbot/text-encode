@@ -30,16 +30,16 @@ function decodeStr(content: string) {
     /[^\u200b-\u200f\uFEFF\u202a-\u202e]/g,
     "",
   );
+  if (!hiddenText) return "";
   const result = hiddenText
-    .split(String.fromCharCode(8206)) // 不是空字符串,是 &#8206;
+    .split(String.fromCharCode(8206))
     .map((char) => {
-      if (char === String.fromCharCode(8203) /* 不是空字符串,是&#8203; */) {
+      if (char === String.fromCharCode(8203)) {
         return "1";
       }
-      if (char === String.fromCharCode(8204) /*  不是空字符串,是&#8204; */) {
+      if (char === String.fromCharCode(8204)) {
         return "0";
       }
-      /* 是&#8205;时,用空格替换 */
       return " ";
     })
     .join("")

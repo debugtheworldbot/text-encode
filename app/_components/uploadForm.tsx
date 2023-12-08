@@ -3,7 +3,7 @@ import { Formik, Form, ErrorMessage } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
 import { uploadImg } from "../actions";
-import { useState } from "react";
+import { toast } from "react-toastify";
 
 interface Prop {
   onSuccess: (url: string) => void;
@@ -12,18 +12,19 @@ interface Prop {
 const UploadForm = (props: Prop) => {
   const { onSuccess } = props;
 
-  const [fullfiled, setFullfiled] = useState(false);
   return (
     <Formik
       initialValues={{
         avatar: "",
         avatarPreview: "",
+        success: false,
       }}
       validationSchema={Yup.object().shape({
         avatar: Yup.string().required(),
         avatarPreview: Yup.string().required(),
       })}
       onSubmit={async ({ avatar }, { setSubmitting, setFieldValue }) => {
+        const id = toast.loading("uploading...");
         try {
           const reader = new FileReader();
           let baseString = "";
@@ -31,12 +32,15 @@ const UploadForm = (props: Prop) => {
             baseString = reader.result as string;
             const res = await uploadImg(baseString);
             if (!res?.url) return;
+            toast.update(id, { type: "success", isLoading: false });
             onSuccess(res.url);
             setFieldValue("avatarPreview", res.url);
+            setFieldValue("success", true);
           };
           // @ts-ignore
           reader.readAsDataURL(avatar);
         } catch (err) {
+          toast.update(id, { type: "error", isLoading: false });
           console.log(err);
         } finally {
           setSubmitting(false);
@@ -44,7 +48,7 @@ const UploadForm = (props: Prop) => {
       }}
     >
       {({
-        values: { avatarPreview },
+        values: { avatarPreview, success },
         handleSubmit,
         setFieldValue,
         isSubmitting,
@@ -55,9 +59,11 @@ const UploadForm = (props: Prop) => {
               <Image width={200} height={200} src={avatarPreview} alt="test" />
             )}
             <label htmlFor="avatar">
-              <div className="border shadow mb-4 cursor-pointer">
-                select secret imgage
-              </div>
+              {!avatarPreview && (
+                <div className="border shadow mb-4 cursor-pointer">
+                  select secret image
+                </div>
+              )}
               <input
                 className="hidden"
                 onChange={(e) => {
@@ -78,7 +84,7 @@ const UploadForm = (props: Prop) => {
             </label>
             <ErrorMessage name="avatar" />
           </div>
-          {!avatarPreview && (
+          {!success && (
             <button
               className="border shadow"
               disabled={isSubmitting}
