@@ -18,7 +18,7 @@ function encodeStr(text: string, hiddenImgSrc: string) {
         }
         return String.fromCharCode(8205); // 空格 -> 零宽连字符&#8205;
       })
-      .join(String.fromCharCode(8206)),
+      .join(""),
   );
   return tempStrArr.join("");
 }
@@ -32,7 +32,7 @@ function decodeStr(content: string) {
   );
   if (!hiddenText) return "";
   const result = hiddenText
-    .split(String.fromCharCode(8206))
+    .split("")
     .map((char) => {
       if (char === String.fromCharCode(8203)) {
         return "1";

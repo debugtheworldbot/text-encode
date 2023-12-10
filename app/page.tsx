@@ -15,7 +15,6 @@ const IndexPage = () => {
   const dRef = useRef<any>(null);
 
   const onUploaded = (url: string) => {
-    toast("upload success");
     const input = eRef.current?.value;
     const result = encodeStr(input, url);
 

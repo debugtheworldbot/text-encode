@@ -25,11 +25,11 @@ const UploadForm = (props: Prop) => {
       })}
       onSubmit={async ({ avatar }, { setSubmitting, setFieldValue }) => {
         if (!validate()) return;
-        const id = toast.loading("uploading...");
+        const id = toast.loading("encoding...");
         try {
           const reader = new FileReader();
           let baseString = "";
-          reader.onloadend = async function() {
+          reader.onloadend = async function () {
             baseString = reader.result as string;
             const res = await uploadImg(baseString);
             if (!res?.url) return;
