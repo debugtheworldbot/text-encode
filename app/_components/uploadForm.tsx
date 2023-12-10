@@ -7,10 +7,10 @@ import { toast } from "react-toastify";
 
 interface Prop {
   onSuccess: (url: string) => void;
-  onFail?: () => void;
+  validate: () => boolean;
 }
 const UploadForm = (props: Prop) => {
-  const { onSuccess } = props;
+  const { onSuccess, validate } = props;
 
   return (
     <Formik
@@ -24,6 +24,7 @@ const UploadForm = (props: Prop) => {
         avatarPreview: Yup.string().required(),
       })}
       onSubmit={async ({ avatar }, { setSubmitting, setFieldValue }) => {
+        if (!validate()) return;
         const id = toast.loading("uploading...");
         try {
           const reader = new FileReader();
@@ -86,7 +87,7 @@ const UploadForm = (props: Prop) => {
               disabled={isSubmitting || !avatarPreview}
               type="submit"
             >
-              {isSubmitting ? "Uploading....." : "upload"}
+              {isSubmitting ? "encoding....." : "encode"}
             </button>
           )}
         </Form>

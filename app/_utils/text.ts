@@ -6,9 +6,9 @@ function encodeStr(text: string, hiddenImgSrc: string) {
     0,
     hiddenImgSrc
       .split("")
-      .map((char) => char.codePointAt(0)!.toString(2))
+      .map((char) => char.codePointAt(0)!.toString(2)) // ["1110011", "1110010", "1110011", "1110010"]
       .join(" ")
-      .split("")
+      .split("") // [ '1', '0', '0', ' ',  ...]
       .map((binaryNum) => {
         if (binaryNum === "1") {
           return String.fromCharCode(8203); // 零宽空格符&#8203;

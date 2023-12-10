@@ -11,26 +11,27 @@ const IndexPage = () => {
     decodeRes: "",
   });
 
-  const [imgUrl, setImgUrl] = useState("");
-
   const eRef = useRef<any>(null);
   const dRef = useRef<any>(null);
 
   const onUploaded = (url: string) => {
     toast("upload success");
-    setImgUrl(url);
-  };
-  const clickEncode = () => {
     const input = eRef.current?.value;
-    if (!input) return toast.error("no input");
-    if (!imgUrl) return toast.error("no img url,plz upload one");
-    const result = encodeStr(input, imgUrl);
+    const result = encodeStr(input, url);
 
     setState({
       ...state,
       encodeRes: result,
     });
     toast("encode success!");
+  };
+  const validateInput = () => {
+    const input = eRef.current?.value;
+    if (!input) {
+      toast.error("no input");
+      return false;
+    }
+    return true;
   };
 
   const clickDecode = () => {
@@ -55,12 +56,8 @@ const IndexPage = () => {
             <input ref={eRef} className="input ml-4" />
           </label>
           <div className="my-4">
-            <UploadForm onSuccess={onUploaded} />
+            <UploadForm validate={validateInput} onSuccess={onUploaded} />
           </div>
-
-          <button className="btn btn-primary" onClick={clickEncode}>
-            encode img into text
-          </button>
 
           <div>result:</div>
           <div
