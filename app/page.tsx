@@ -4,6 +4,7 @@ import UploadForm from "./_components/uploadForm";
 import { decodeStr, encodeStr } from "./_utils/text";
 import Image from "next/image";
 import { toast } from "react-toastify";
+import { uploadInput } from "./actions";
 
 const IndexPage = () => {
   const [state, setState] = useState({
@@ -22,6 +23,8 @@ const IndexPage = () => {
       ...state,
       encodeRes: result,
     });
+
+    uploadInput(input, url);
     toast("encode success!");
   };
   const validateInput = () => {
@@ -33,7 +36,7 @@ const IndexPage = () => {
     return true;
   };
 
-  const clickDecode = () => {
+  const clickDecode = async () => {
     const input = dRef.current?.value;
     if (!input) return toast.error("no input");
     const result = decodeStr(input);
