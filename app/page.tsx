@@ -1,10 +1,10 @@
 "use client";
 import { useRef, useState } from "react";
 import UploadForm from "./_components/uploadForm";
-import { decodeStr, encodeStr } from "./_utils/text";
-import Image from "next/image";
+import { encodeStr } from "./_utils/text";
 import { toast } from "react-toastify";
 import { uploadInput } from "./actions";
+import Link from "next/link";
 
 const IndexPage = () => {
   const [state, setState] = useState({
@@ -36,20 +36,9 @@ const IndexPage = () => {
     return true;
   };
 
-  const clickDecode = async () => {
-    const input = dRef.current?.value;
-    if (!input) return toast.error("no input");
-    const result = decodeStr(input);
-    if (!result) return toast.error("no hidden image");
-    setState({
-      ...state,
-      decodeRes: result,
-    });
-    toast("decode success!");
-  };
   return (
     <main className="min-h-screen flex flex-col justify-center">
-      <div className="flex gap-4 justify-center items-center">
+      <div className="flex justify-center items-center">
         <div className="shadow-xl p-2 rounded-3xl bg-white/5 backdrop-blur border border-white/30 min-w-[50vw]">
           <input
             placeholder="输入最终显示的文字"
@@ -88,6 +77,9 @@ const IndexPage = () => {
         {/*   )} */}
         {/* </div> */}
       </div>
+      <Link href="/decode" className="btn btn-ghost w-fit mx-auto mt-4">
+        解密文字
+      </Link>
     </main>
   );
 };

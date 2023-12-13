@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 body {
+  color: rgba(255, 255, 255, 0.5);
   background: url("https://other-qiniu.jellow.site/FiZ2sMcpuc_IPwjgWBFEw6MK2_-7.svg");
   background-repeat: no-repeat;
   background-size: cover;
