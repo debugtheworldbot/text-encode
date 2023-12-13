@@ -8,19 +8,15 @@ import Link from "next/link";
 const DecodePage = () => {
   const dRef = useRef<any>(null);
   const [state, setState] = useState({
-    encodeRes: "",
     decodeRes: "",
   });
   const clickDecode = async () => {
     const input = dRef.current?.value;
-    if (!input) return toast.error("no input");
+    if (!input) return toast.error("请输入内容");
     const result = decodeStr(input);
-    if (!result) return toast.error("no hidden image");
-    setState({
-      ...state,
-      decodeRes: result,
-    });
-    toast("decode success!");
+    if (!result) return toast.error("无法解密内容");
+    setState({ decodeRes: result });
+    toast.success("解密成功");
   };
   return (
     <main className="min-h-screen flex justify-center items-center">

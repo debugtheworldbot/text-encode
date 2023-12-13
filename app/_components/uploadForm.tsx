@@ -25,7 +25,7 @@ const UploadForm = (props: Prop) => {
       })}
       onSubmit={async ({ avatar }, { setSubmitting, setFieldValue }) => {
         if (!validate()) return;
-        const id = toast.loading("encoding...");
+        const id = toast.loading("合成中...");
         try {
           const reader = new FileReader();
           let baseString = "";
@@ -33,7 +33,12 @@ const UploadForm = (props: Prop) => {
             baseString = reader.result as string;
             const res = await uploadImg(baseString);
             if (!res?.url) return;
-            toast.update(id, { type: "success", isLoading: false });
+            toast.update(id, {
+              render: "合成成功",
+              type: "success",
+              isLoading: false,
+              autoClose: 2000,
+            });
             onSuccess(res.url);
             setFieldValue("avatarPreview", res.url);
             setFieldValue("success", true);
@@ -61,7 +66,13 @@ const UploadForm = (props: Prop) => {
         >
           <div className="border border-white/10 rounded-2xl mt-1 overflow-hidden">
             {avatarPreview ? (
-              <Image width={600} height={600} src={avatarPreview} alt="test" />
+              <Image
+                className="block m-auto"
+                width={600}
+                height={600}
+                src={avatarPreview}
+                alt="test"
+              />
             ) : (
               <label
                 htmlFor="avatar"
