@@ -54,14 +54,31 @@ const UploadForm = (props: Prop) => {
         setFieldValue,
         isSubmitting,
       }) => (
-        <Form onSubmit={handleSubmit} encType="multipart/form-data">
-          <div>
+        <Form
+          className="flex flex-col"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
+          <div className="border border-white/10 rounded-2xl mt-1 overflow-hidden">
             {avatarPreview ? (
               <Image width={600} height={600} src={avatarPreview} alt="test" />
             ) : (
-              <label htmlFor="avatar">
+              <label
+                htmlFor="avatar"
+                className="block w-full h-full text-white/50 text-center cursor-pointer py-12 "
+              >
+                <div className="flex items-center justify-center">
+                  <Image
+                    src="/add.svg"
+                    width={25}
+                    height={25}
+                    className="mr-2"
+                    alt="upload"
+                  />
+                  选择要合成的图片
+                </div>
                 <input
-                  className="file-input"
+                  className="hidden w-full h-full"
                   onChange={(e) => {
                     if (e.target.files?.[0]) {
                       setFieldValue(
@@ -83,11 +100,11 @@ const UploadForm = (props: Prop) => {
           </div>
           {!success && (
             <button
-              className="btn btn-neutral"
+              className="btn glass bg-slate-100/80 rounded-2xl mt-4 py-2"
               disabled={isSubmitting || !avatarPreview}
               type="submit"
             >
-              {isSubmitting ? "encoding....." : "encode"}
+              {isSubmitting ? "合成中..." : "合成"}
             </button>
           )}
         </Form>

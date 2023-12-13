@@ -48,20 +48,15 @@ const IndexPage = () => {
     toast("decode success!");
   };
   return (
-    <main className="min-h-screen flex flex-col">
-      <h1 className="text-center text-3xl my-8">Encode your image into text</h1>
-
+    <main className="min-h-screen flex flex-col justify-center">
       <div className="flex gap-4 justify-center items-center">
-        <div className="shadow-xl p-6 rounded">
-          <label className="label">
-            endcode text:
-            <input ref={eRef} className="input ml-4" />
-          </label>
-          <div className="my-4">
-            <UploadForm validate={validateInput} onSuccess={onUploaded} />
-          </div>
-
-          <div>result:</div>
+        <div className="shadow-xl p-2 rounded-3xl bg-white/5 backdrop-blur border border-white/30 min-w-[50vw]">
+          <input
+            placeholder="输入最终显示的文字"
+            ref={eRef}
+            className="px-3 py-3 w-full bg-transparent border border-white/10 rounded-2xl text-white/60 text-center"
+          />
+          <UploadForm validate={validateInput} onSuccess={onUploaded} />
           <div
             className="link link-info cursor-pointer"
             onClick={() => {
@@ -73,25 +68,25 @@ const IndexPage = () => {
           </div>
         </div>
 
-        <div className="shadow-xl p-6 rounded">
-          <label className="label">
-            decode text:
-            <input ref={dRef} className="input ml-4" />
-          </label>
-          <button className="block btn btn-primary" onClick={clickDecode}>
-            decode image:
-          </button>
-          {state.decodeRes && (
-            <div>
-              <Image
-                width={600}
-                height={600}
-                src={state.decodeRes}
-                alt="result"
-              />
-            </div>
-          )}
-        </div>
+        {/* <div className="shadow-xl p-6 rounded"> */}
+        {/*   <label className="label"> */}
+        {/*     decode text: */}
+        {/*     <input ref={dRef} className="input ml-4" /> */}
+        {/*   </label> */}
+        {/*   <button className="block btn btn-primary" onClick={clickDecode}> */}
+        {/*     decode image: */}
+        {/*   </button> */}
+        {/*   {state.decodeRes && ( */}
+        {/*     <div> */}
+        {/*       <Image */}
+        {/*         width={600} */}
+        {/*         height={600} */}
+        {/*         src={state.decodeRes} */}
+        {/*         alt="result" */}
+        {/*       /> */}
+        {/*     </div> */}
+        {/*   )} */}
+        {/* </div> */}
       </div>
     </main>
   );
