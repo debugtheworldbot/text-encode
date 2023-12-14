@@ -20,7 +20,7 @@ const DecodePage = () => {
   };
   return (
     <main className="min-h-screen flex justify-center items-center">
-      <div className="p-6 rounded w-[50vw]">
+      <div className="p-6 rounded w-[90vw] md:w-[50vw]">
         {state.decodeRes ? (
           <div className="flex flex-col items-center">
             <div className="flex justify-center border border-white/20 rounded-2xl backdrop-blur p-2">
