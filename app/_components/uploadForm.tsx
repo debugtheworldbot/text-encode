@@ -25,7 +25,7 @@ const UploadForm = (props: Prop) => {
       })}
       onSubmit={async ({ avatar }, { setSubmitting, setFieldValue }) => {
         if (!validate()) return;
-        const id = toast.loading("合成中...");
+        const id = toast.loading("encoding...");
         try {
           const reader = new FileReader();
           let baseString = "";
@@ -34,7 +34,7 @@ const UploadForm = (props: Prop) => {
             const res = await uploadImg(baseString);
             if (!res?.url) return;
             toast.update(id, {
-              render: "合成成功",
+              render: "encode success",
               type: "success",
               isLoading: false,
               autoClose: 2000,
@@ -86,7 +86,7 @@ const UploadForm = (props: Prop) => {
                     className="mr-2"
                     alt="upload"
                   />
-                  选择要合成的图片
+                  image to be encoded
                 </div>
                 <input
                   className="hidden w-full h-full"
@@ -115,7 +115,7 @@ const UploadForm = (props: Prop) => {
               disabled={isSubmitting || !avatarPreview}
               type="submit"
             >
-              {isSubmitting ? "合成中..." : "合成"}
+              {isSubmitting ? "encoding..." : "encode"}
             </button>
           )}
         </Form>

@@ -25,11 +25,9 @@ export async function uploadImg(file: string) {
 export async function uploadInput(input: string, imgUrl: string) {
   try {
     await sql`INSERT INTO Inputs (Input, ImgUrl) VALUES (${input}, ${imgUrl});`;
-    const result = await sql`SELECT * FROM Inputs;`;
-    console.log(result);
+    await sql`SELECT * FROM Inputs;`;
     return "ok";
   } catch (error) {
-    console.log(error);
     return "error";
   }
 }

@@ -12,11 +12,11 @@ const DecodePage = () => {
   });
   const clickDecode = async () => {
     const input = dRef.current?.value;
-    if (!input) return toast.error("请输入内容");
+    if (!input) return toast.error("please fill the input");
     const result = decodeStr(input);
-    if (!result) return toast.error("无法解密内容");
+    if (!result) return toast.error("no hidden image in the input");
     setState({ decodeRes: result });
-    toast.success("解密成功");
+    toast.success("decode success");
   };
   return (
     <main className="min-h-screen flex justify-center items-center">
@@ -37,23 +37,23 @@ const DecodePage = () => {
               }}
               className="btn mx-auto my-4"
             >
-              再解密一次
+              decode again
             </button>
 
-            <Link href={"/"}> 我也要加密图片</Link>
+            <Link href={"/"}> encode text</Link>
           </div>
         ) : (
           <>
             <input
               ref={dRef}
-              placeholder="输入要解密的文字"
+              placeholder="text to be decoded"
               className="px-3 py-12 w-full bg-transparent border border-white/20 rounded-2xl text-white/60 text-center backdrop-blur"
             />
             <button
               className="btn block mx-auto mt-4 px-12"
               onClick={clickDecode}
             >
-              解密
+              decode
             </button>
           </>
         )}

@@ -26,7 +26,7 @@ const IndexPage = () => {
   const validateInput = () => {
     const input = eRef.current?.value;
     if (!input) {
-      toast.error("请输入内容");
+      toast.error("please fill the input");
       return false;
     }
     return true;
@@ -42,7 +42,7 @@ const IndexPage = () => {
                 className="link link-info cursor-pointer text-center py-12 text-2xl"
                 onClick={() => {
                   navigator.clipboard.writeText(state.encodeRes);
-                  toast("已复制");
+                  toast("copied");
                 }}
               >
                 {state.encodeRes}
@@ -51,7 +51,7 @@ const IndexPage = () => {
           ) : (
             <>
               <input
-                placeholder="输入最终显示的文字"
+                placeholder="text to be encoded"
                 ref={eRef}
                 className="px-3 py-3 w-full bg-transparent border border-white/10 rounded-2xl text-white/60 text-center"
               />
@@ -61,7 +61,7 @@ const IndexPage = () => {
         </div>
       </div>
       <Link href="/decode" className="btn btn-ghost w-fit mx-auto mt-4">
-        解密文字
+        decode text
       </Link>
     </main>
   );
