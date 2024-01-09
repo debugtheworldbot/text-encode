@@ -29,7 +29,6 @@ export const Uploader = (props: Prop) => {
         isLoading: false,
       });
       const input = eRef.current?.value;
-      console.log({ input, url });
       onEncode(input, url);
     }
   };
@@ -63,7 +62,6 @@ export const Uploader = (props: Prop) => {
           const result = await fetch("/api", {
             method: "GET",
           }).then((r) => r.json());
-          console.log({ result });
           return result;
         }}
       >
