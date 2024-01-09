@@ -32,6 +32,9 @@ dependencies:
   imagekit:
     specifier: ^4.1.4
     version: 4.1.4
+  imagekitio-react:
+    specifier: ^3.0.0
+    version: 3.0.0(react-dom@18.2.0)(react@18.2.0)
   next:
     specifier: 14.0.4
     version: 14.0.4(react-dom@18.2.0)(react@18.2.0)
@@ -1649,6 +1652,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /imagekit-javascript@2.0.0:
+    resolution: {integrity: sha512-F2p1DYk68Nr2rw0I6X1trki/QdTShSwbq4rf3ju1/71Bodx5smN9mPfEATGHKRx9iQeeGgmDZM8wNLUcg3HeWA==}
+    dev: false
+
   /imagekit@4.1.4:
     resolution: {integrity: sha512-yie0hMi+GVk8gtwi3hr3lwh/pAJv/jGpzteYOubs0I4h3Jic5xBXzWPrlGM4pPbAfWMr5UFXk8w0I4A1Xr6fDQ==}
     engines: {node: '>=10.0.0'}
@@ -1661,6 +1668,18 @@ packages:
       uuid: 8.3.2
     transitivePeerDependencies:
       - debug
+    dev: false
+
+  /imagekitio-react@3.0.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-tAqIgiyKcLdleSzLSvOo8lNODMVzMKlt8yfpdKc9oLmosyeYe16uZZTtbpmmRPhMquSoevfnaDsCisHUOLWTow==}
+    peerDependencies:
+      react: ^16.13.1 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0
+    dependencies:
+      imagekit-javascript: 2.0.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /import-fresh@3.3.0:
@@ -2112,7 +2131,6 @@ packages:
   /object-assign@4.1.1:
     resolution: {integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /object-hash@3.0.0:
     resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
@@ -2393,7 +2411,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /property-expr@2.0.6:
     resolution: {integrity: sha512-SVtmxhRE/CGkn3eZY1T6pC8Nln6Fr/lu1mKSgRud0eC73whjGfoAogbn78LkD8aFL0zz3bAFerKSnOl7NlErBA==}

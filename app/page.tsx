@@ -1,20 +1,18 @@
 "use client";
-import { useRef, useState } from "react";
-import UploadForm from "./_components/uploadForm";
+import { useState } from "react";
 import { encodeStr } from "./_utils/text";
 import { toast } from "react-toastify";
 import { uploadInput } from "./actions";
 import Link from "next/link";
+import "regenerator-runtime/runtime";
+import { Uploader } from "./_components/uploader";
 
 const IndexPage = () => {
   const [state, setState] = useState({
     encodeRes: "",
   });
 
-  const eRef = useRef<any>(null);
-
-  const onUploaded = (url: string) => {
-    const input = eRef.current?.value;
+  const onEncode = (input: string, url: string) => {
     const result = encodeStr(input, url);
 
     setState({
@@ -22,14 +20,6 @@ const IndexPage = () => {
     });
 
     uploadInput(input, url);
-  };
-  const validateInput = () => {
-    const input = eRef.current?.value;
-    if (!input) {
-      toast.error("please fill the input");
-      return false;
-    }
-    return true;
   };
 
   return (
@@ -49,14 +39,7 @@ const IndexPage = () => {
               </div>
             </>
           ) : (
-            <>
-              <input
-                placeholder="text to be encoded"
-                ref={eRef}
-                className="px-3 py-3 w-full bg-transparent border border-white/10 rounded-2xl text-white/60 text-center"
-              />
-              <UploadForm validate={validateInput} onSuccess={onUploaded} />
-            </>
+            <Uploader onEncode={onEncode} />
           )}
         </div>
       </div>
