@@ -11,17 +11,13 @@ export const Uploader = (props: Prop) => {
   const { onEncode } = props;
   const [url, setUrl] = useState<string>("");
   const [preview, setPreview] = useState<string>("");
-  const [uploading, setUploading] = useState<boolean>(false);
+  const [encoding, setEncoding] = useState<boolean>(false);
   const eRef = useRef<any>(null);
   const id = useRef<string | number>("");
-  const onError = () => {
-    setUploading(false);
-  };
 
   const onSuccess = (res: any) => {
     const url = res.url;
     setUrl(url);
-    setUploading(false);
     if (id.current) {
       toast.update(id.current, {
         type: "success",
@@ -30,14 +26,14 @@ export const Uploader = (props: Prop) => {
       });
       const input = eRef.current?.value;
       onEncode(input, url);
+      setEncoding(false);
     }
-  };
-  const onUploadStart = () => {
-    setUploading(true);
   };
 
   const clickEncode = () => {
     const input = eRef.current?.value;
+    if (encoding) return;
+    setEncoding(true);
     if (!input) return toast.error("please fill the input");
     if (!url) {
       id.current = toast.loading("encoding...");
@@ -45,6 +41,7 @@ export const Uploader = (props: Prop) => {
     }
     toast.success("encode success");
     onEncode(input, url);
+    setEncoding(false);
   };
 
   return (
@@ -77,9 +74,7 @@ export const Uploader = (props: Prop) => {
                 type="file"
                 accept="image/*"
                 fileName="my-upload"
-                onError={onError}
                 onSuccess={onSuccess}
-                onUploadStart={onUploadStart}
                 onChange={(e) => {
                   if (e.target.files?.[0]) {
                     setPreview(URL.createObjectURL(e.target.files[0]));
