@@ -73,7 +73,7 @@ export const Uploader = (props: Prop) => {
                 id="Upload"
                 type="file"
                 accept="image/*"
-                fileName="my-upload"
+                fileName="C"
                 onSuccess={onSuccess}
                 onChange={(e) => {
                   if (e.target.files?.[0]) {
