@@ -31,7 +31,21 @@ const UploadForm = (props: Prop) => {
           let baseString = "";
           reader.onloadend = async function () {
             baseString = reader.result as string;
-            const res = await uploadImg(baseString);
+            const res = await fetch("/api", {
+              method: "POST",
+              body: JSON.stringify({ src: baseString }),
+              headers: {
+                "content-type": "application/json",
+              },
+            })
+              .then((r) => r.json())
+              .catch(() => {
+                toast.update(id, {
+                  type: "error",
+                  isLoading: false,
+                });
+              });
+            console.log({ res });
             if (!res?.url) return;
             toast.update(id, {
               render: "encode success",
