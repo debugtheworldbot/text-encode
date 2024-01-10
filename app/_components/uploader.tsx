@@ -23,6 +23,7 @@ export const Uploader = (props: Prop) => {
         type: "success",
         render: "encode success",
         isLoading: false,
+        autoClose: 2000,
       });
       const input = eRef.current?.value;
       onEncode(input, url);
