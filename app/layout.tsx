@@ -4,6 +4,8 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "magic text",
@@ -18,6 +20,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Link
+          className="absolute top-4 right-4"
+          href="https://github.com/debugtheworldbot/text-encode"
+          target="_blank"
+        >
+          <Image
+            alt="github"
+            width={40}
+            height={40}
+            src="https://nextjs.org/icons/github.svg"
+          />
+        </Link>
         {children}
         <ToastContainer />
         <SpeedInsights />
